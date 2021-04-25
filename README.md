@@ -1,10 +1,12 @@
-#Projeto Sardinha
+# Projeto Sardinha
 
-##Lista de tarefas
+## Lista de tarefas
 
--[x]Fazer o formulário aparecer
--[ ]Fazer o formulário esconder
--[ ]Fazer um entrada de procura
--[ ]Adicionar a uma lista apos seleção
--[ ]Carregar valores do intervalo de entrada
--[ ]Calcular o valor de lucro dos alvos a partir de um dado valor
+- [x] Fazer o formulário aparecer
+- [ ] Fazer o formulário esconder
+- [ ] Fazer um entrada de procura
+- [ ] Adicionar a uma lista apos seleção
+- [ ] Carregar valores do intervalo de entrada
+- [ ] Calcular o valor de lucro dos alvos a partir de um dado valor
+
+
