@@ -1,5 +1,7 @@
 #Projeto Sardinha
+
 ##Lista de tarefas
+
 -[x]Fazer o formulário aparecer
 -[ ]Fazer o formulário esconder
 -[ ]Fazer um entrada de procura
