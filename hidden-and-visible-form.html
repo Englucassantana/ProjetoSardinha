@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Projeto Sardinha</title>
-    <script src="hidden-and-visible-form.js"></script>
+    <script src="js/hidden-and-visible-form.js"></script>
+    <script src="js/calcularAlvo.js"></script>
 </head>
 <body>
 <div id="'page">
@@ -19,11 +20,14 @@
             <label for="valor-maximo-entrada">Valor máximo de entrada</label>
             <input id="valor-maximo-entrada"type="number" name= "intervalo-de-entrada" inputmode="decimal" placeholder="Valor máximo de entrada">
             <label for="alvo-um">Alvo 1</label>
-            <input id="alvo-um" type="number" name="alvo-um" inputmode="decimal" placeholder="Alvo 1">
+            <input id="alvo-um" class="alvo" type="number" name="alvo-um" inputmode="decimal" placeholder="Alvo 1">
+            <span id="lucro-alvo-um" class="lucro-alvo">%</span>
             <label for="alvo-dois">Alvo 2</label>
-            <input id="alvo-dois" type="number" name="alvo-dois" inputmode="decimal" placeholder="Alvo 2">
+            <input id="alvo-dois" class="alvo" type="number" name="alvo-dois" inputmode="decimal" placeholder="Alvo 2">
+            <span id="lucro-alvo-dois" class="lucro-alvo">%</span>
             <label for="alvo-tres">Alvo 3</label>
-            <input id="alvo-tres" type="number" name="alvo-tres" inputmode="decimal" placeholder="Alvo 3">
+            <input id="alvo-tres" class="alvo" type="number" name="alvo-tres" inputmode="decimal" placeholder="Alvo 3">
+            <span id="lucro-alvo-tres" class="lucro-alvo">%</span>
             <label for="stop-loss">Stop Loss</label>
             <input id="stop-loss" type="number" inputmode="decimal" placeholder="Stop loss">
             <input type="submit" value="Enviar para o Telegram">
