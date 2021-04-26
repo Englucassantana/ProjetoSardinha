@@ -9,4 +9,5 @@
 - [ ] Carregar valores do intervalo de entrada
 - [ ] Calcular o valor de lucro dos alvos a partir de um dado valor
 - [ ] Implementar calculo de valores de lucro por classe
-
+- [ ] Pegar lista de preços
+- [ ] Enviar sinais para um servidor
