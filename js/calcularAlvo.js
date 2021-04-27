@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded",()=>{
     let alvo = document.getElementsByClassName("alvo");
     let valorDoAtivo = 100;
-    for( let i = 0; i <= alvo.length; i++){
+    for( let i = 0; i < alvo.length; i++){
         alvo[i].addEventListener("change", ()=>{
             let lucro = alvo[i].value - valorDoAtivo;
             let lucroAlvo = document.getElementsByClassName("lucro-alvo");
