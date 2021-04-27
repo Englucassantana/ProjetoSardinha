@@ -12,3 +12,7 @@
 - [ ] Pegar lista de preços
 - [ ] Enviar sinais para um servidor
 - [ ] Calcular perda do stop
+- [x] Fazer uma requisição de uma api
+- [x] Implementar *live search* para fim de teste
+- [ ] Implementar *live search* com a api de requisição
+- [ ] Montar a lista com os dados da requisição
