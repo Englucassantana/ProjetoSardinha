@@ -14,5 +14,7 @@
 - [ ] Calcular perda do stop
 - [x] Fazer uma requisição de uma api
 - [x] Implementar *live search* para fim de teste
-- [ ] Implementar *live search* com a api de requisição
-- [ ] Montar a lista com os dados da requisição
+- [x] Implementar *live search* com a api de requisição
+- [x] Montar a lista com os dados da requisição
+- [x] Montar lista de sinais
+- [ ] Criar uma função que detecta se um ativo já está na lista de sinais.

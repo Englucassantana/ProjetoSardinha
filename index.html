@@ -6,6 +6,8 @@
     <script src="js/hidden-and-visible-form.js"></script>
     <script src="js/calcularAlvo.js"></script>
     <script src="js/api-bitcoin.js"></script>
+    <script src="js/livesearch.js"></script>
+    <script src="js/selecionar-sinais.js"></script>
 </head>
 <body>
 <div id="'page">
@@ -14,7 +16,16 @@
     </header>
     <div id="content">
         <div id="filter">
+            <input id="pesquisa-ativo" type="text" placeholder="Pesquisa de ativo">
+            <ul id="lista-de-ativos" style="display: none">
 
+            </ul>
+        </div>
+        <div id="sinais">
+            <h1>Sinais</h1>
+            <ul id="lista-de-sinais">
+
+            </ul>
         </div>
         <button id="open-button-form">Open Form</button>
         <form id="signal-configuration-panel" style="display: none">
