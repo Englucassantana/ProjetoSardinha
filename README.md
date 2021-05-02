@@ -18,3 +18,4 @@
 - [x] Montar a lista com os dados da requisição
 - [x] Montar lista de sinais
 - [ ] Criar uma função que detecta se um ativo já está na lista de sinais.
+- [x] Mostar formulário para um ativo qualquer.
