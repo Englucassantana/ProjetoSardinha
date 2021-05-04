@@ -19,3 +19,16 @@
 - [x] Montar lista de sinais
 - [ ] Criar uma função que detecta se um ativo já está na lista de sinais.
 - [x] Mostar formulário para um ativo qualquer.
+
+### Pesquisar ativo
+- [] listar objetos dos ativos
+- [] listar simbolos dos ativos
+- [] usar função do autocomplete
+
+### Listar sinais
+- [] escutar evento click
+- [] verificar se o simbolo do ativo está relacionado na api
+- [] verificar so o ativo está repetido
+- [] adicionar novo simbolo do ativo a lista de sinais
+- [] criar um formulário para configuração de sinais associado ao novo ativo da lista de sinas
+- [] fazer um post do novo ativo para o firebase
