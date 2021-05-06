@@ -2,73 +2,69 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Projeto Sardinha</title>
-    <script src="js/hidden-and-visible-form.js"></script>
-    <script src="js/calcularAlvo.js"></script>
-    <script src="js/api-bitcoin.js"></script>
-    <script src="js/livesearch.js"></script>
-    <script src="js/selecionarSinais.js"></script>
-    <script src="js/carregar_entradas.js"></script>
-    <script src="js/autocomplete.js"></script>
+    <title>Projeto Sardinho</title>
+    <link href="css/index.css" type="text/css" rel="stylesheet"/>
+    <script src="js/main.js"></script>
 </head>
 <body>
-<div id="'page">
+<div id="page">
     <header>
-        <h1>Hidden and Visible Form</h1>
+        <h1>Projeto Sardinha</h1>
     </header>
     <div id="content">
-        <form autocomplete="off" action="/action_page.php">
-            <div class="autocomplete" style="width:300px;">
-                <input id="myInput" type="text" name="myCountry" placeholder="Country">
+        <form autocomplete="off">
+            <label for="myInput">Digite o simbolo do ativo:</label>
+            <div class="autocomplete">
+                <input id="myInput" class="input-text" type="text" name="myCountry" placeholder="BTCUSD">
             </div>
-            <input id="selecionar-sinal" type="submit">
         </form>
-<!--        <div id="filter">-->
-<!--            <input id="pesquisa-ativo" type="text" placeholder="Pesquisa de ativo">-->
-<!--            <ul id="lista-de-ativos" style="display: none">-->
+        <form class="signal-configuration-panel">
+            <fieldset id="intervalo-de-entrada">
+                <legend> Intervalo de entrada</legend>
+                <input class="load-button" type = "button" value="load">
+                <div class="tabela tabela-intervalo-de-entrada">
+                    <div class="coluna coluna-intervalo-de-entrada">
+                        <label>Valor minimo de entrada</label><br>
+                        <input class="valor-minimo-entrada input-text" type="number" name= "intervalo-de-entrada" inputmode="decimal" placeholder="Valor mínimo de entrada">
+                    </div>
+                    <div class="coluna">
+                        <label >Valor máximo de entrada</label> <br>
+                        <input class="valor-maximo-entrada input-text" type="number" name= "intervalo-de-entrada" inputmode="decimal" placeholder="Valor máximo de entrada">
+                    </div>
+                </div>
 
-<!--            </ul>-->
-<!--        </div>-->
-
-        <h1>Sinais</h1>
-        <div id="sinais">
-            <ul id="lista-de-sinais">
-<!--                <li>-->
-<!--                    <span class="nome-do-ativo">BTCUSDT</span>-->
-<!--                    <button id="open-button-form">Open Form</button>-->
-<!--                    <form id="signal-configuration-panel" style="display: none">-->
-<!--                        <input id="load-button" type = "button" value="load">-->
-<!--                        <span> Intervalo de entrada</span>-->
-<!--                        <label for="valor-minimo-entrada">Valor minimo de entrada</label>-->
-<!--                        <input id="valor-minimo-entrada"type="number" name= "intervalo-de-entrada" inputmode="decimal" placeholder="Valor mínimo de entrada">-->
-<!--                        <label for="valor-maximo-entrada">Valor máximo de entrada</label>-->
-<!--                        <input id="valor-maximo-entrada"type="number" name= "intervalo-de-entrada" inputmode="decimal" placeholder="Valor máximo de entrada">-->
-<!--                        <label for="alvo-um">Alvo 1</label>-->
-<!--                        <input id="alvo-um" class="alvo" type="number" name="alvo-um" inputmode="decimal" placeholder="Alvo 1">-->
-<!--                        <span id="lucro-alvo-um" class="lucro-alvo">%</span>-->
-<!--                        <label for="alvo-dois">Alvo 2</label>-->
-<!--                        <input id="alvo-dois" class="alvo" type="number" name="alvo-dois" inputmode="decimal" placeholder="Alvo 2">-->
-<!--                        <span id="lucro-alvo-dois" class="lucro-alvo">%</span>-->
-<!--                        <label for="alvo-tres">Alvo 3</label>-->
-<!--                        <input id="alvo-tres" class="alvo" type="number" name="alvo-tres" inputmode="decimal" placeholder="Alvo 3">-->
-<!--                        <span id="lucro-alvo-tres" class="lucro-alvo">%</span>-->
-<!--                        <label for="stop-loss">Stop Loss</label>-->
-<!--                        <input id="stop-loss" type="number" inputmode="decimal" placeholder="Stop loss">-->
-<!--                        <input type="submit" value="Enviar para o Telegram">-->
-<!--                    </form>-->
-<!--                </li>-->
-
-
-            </ul>
-        </div>
-
-
+                </fieldset>
+            <fieldset id="alvos">
+                <legend>Alvos</legend>
+                <div class="tabela-alvo">
+                    <div class="linha-alvo">
+                        <label >Alvo 1</label>
+                        <input class="alvo input-text" type="number" name="alvo-um" inputmode="decimal" placeholder="Alvo 1">
+                        <span class="lucro-alvo">%</span>
+                    </div>
+                    <div class="linha-alvo">
+                        <label >Alvo 2</label>
+                        <input class="alvo input-text" type="number" name="alvo-dois" inputmode="decimal" placeholder="Alvo 2">
+                        <span class="lucro-alvo">%</span>
+                    </div>
+                    <div class="linha-alvo">
+                        <label >Alvo 3</label>
+                        <input class="alvo input-text" type="number" name="alvo-tres" inputmode="decimal" placeholder="Alvo 3">
+                        <span class="lucro-alvo">%</span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="stop">
+                <legend>Stop</legend>
+                <label >Stop Loss</label>
+                <input class="stop-loss input-text" type="number" inputmode="decimal" placeholder="Stop loss">
+                <span class="prejuizo-stop-loss">%</span>
+            </fieldset>
+        </form>
+        <button id ="gerar-comando">Gerar Comando</button>
+        <span id="comando"></span>
     </div>
-    <footer>
-        <span>Feito por: Lucas/Ramon</span>
-    </footer>
 </div>
-
 
 </body>
 </html>
