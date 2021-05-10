@@ -1,8 +1,47 @@
+html{
+    background-color: #F2F3F1;
+}
+
+h1{
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
 body{
-    max-width: 740px;
+    font-family: sans-serif;
     display: flex;
     justify-content: space-around;
 }
+
+#page{
+    max-width: 740px;
+}
+
+.simbolo-do-ativo{
+    font-size: 24px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.load-button{
+    width: 100%;
+    background-color: #C2FEF0;
+    border: none;
+    padding: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.load-button:hover{
+    outline-style: solid;
+    outline-color: gold;
+    cursor: pointer;
+    background-color: #3DFFD1;
+}
+
+.load-button:focus{
+    outline: none;
+}
+
 .signal-configuration-panel{
     background-color: #F2F3F1;
 }
@@ -41,4 +80,20 @@ body{
     /*when navigating through the items using the arrow keys:*/
     background-color: DodgerBlue !important;
     color: #ffffff;
+}
+#gerar-comando{
+    width: 100%;
+    background-color: #C2FEF0;
+    border: none;
+    padding: 3%;
+    margin-top: 2vh;
+}
+#gerar-comando:hover{
+    outline-style: solid;
+    outline-color: gold;
+    cursor: pointer;
+    background-color: #3DFFD1;
+}
+#gerar-comando:focus{
+    outline: none;
 }

@@ -132,9 +132,10 @@ document.addEventListener("DOMContentLoaded",()=> {
     let valorDoAtivo = 0;
     console.log(valorDoAtivo);
     let intervaloDeEntrada = document.getElementById('intervalo-de-entrada');
-    intervaloDeEntrada.addEventListener('keyup', ()=>{
+    intervaloDeEntrada.addEventListener('input', ()=>{
         valorDoAtivo = document.getElementsByClassName("valor-maximo-entrada")[0].value;
         valorDoAtivo = Number(valorDoAtivo);
+        console.log("valor Máximo de Entrada:" + valorDoAtivo);
         let alvo = document.getElementsByClassName('alvo');
         for (let i = 0; i < alvo.length; i++){
             let lucro = 100*(alvo[i].value - valorDoAtivo)/valorDoAtivo;
@@ -153,29 +154,99 @@ document.addEventListener("DOMContentLoaded",()=> {
     // let valorDoAtivo = document.getElementsByClassName("valor-maximo-entrada")[0].value;
     // valorDoAtivo:number = Number(valorDoAtivo);
     let alvos = document.getElementById("alvos");
-    alvos.addEventListener('keyup',()=>{
+    alvos.addEventListener('input',()=>{
         console.log(alvos);
         console.log(valorDoAtivo);
+        let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
+        valorDoAtivo = valorMaximoDeEntrada.value
         let alvo = event.target||event.srcElement;
         console.log(alvo);
         if(alvo.tagName == "INPUT"){
-            let lucro = 100*(Number(alvo.value) - valorDoAtivo)/valorDoAtivo;
+            let lucro = 100*(Number(alvo.value) - Number(valorDoAtivo))/Number(valorDoAtivo);
             let lucroAlvo = alvo.nextElementSibling;
-            lucroAlvo.innerText = lucro + "%";
+            lucroAlvo.innerText = lucro.toFixed(2) + "%";
+            atualizarCorAlvos(lucro,lucroAlvo);
         }
     });
 
     //CALCULO DO STOP
     let stop = document.getElementById("stop");
-    stop.addEventListener('keyup',()=>{
+    stop.addEventListener('input',()=>{
         console.log(stop);
+        let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
+        valorDoAtivo = valorMaximoDeEntrada.value
         let stopLoss = event.target||event.srcElement;
         console.log(stopLoss);
         if(stopLoss.tagName == "INPUT"){
             let prejuizo = 100*(stopLoss.value - valorDoAtivo)/valorDoAtivo;
             let prejuizoStopLoss = stopLoss.nextElementSibling;
-            prejuizoStopLoss.innerText = prejuizo + "%";
+            prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
+            atualizarCorStop(prejuizo, prejuizoStopLoss);
+        }
+    });
+
+    //Carregar entrada
+    let loadButton = document.getElementsByClassName("load-button")[0];
+    loadButton.addEventListener("click",()=>{
+        let myInput = document.getElementById("myInput");
+        let precoAtualDoAtivo = 0;
+        for (let i = 0; i < responseObject.length; i++) {
+            if(responseObject[i].symbol == myInput.value){
+                precoAtualDoAtivo = responseObject[i].price;
+                break;
+            }
+        }
+        if(precoAtualDoAtivo > 0){
+            let valorMinimoDeEntrada = document.getElementsByClassName("valor-minimo-entrada")[0];
+            valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
+            let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
+            valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
+            console.log(valorMaximoDeEntrada.value);
+            atualizarAlvos(valorMaximoDeEntrada.value);
+            atualizarStop(valorMaximoDeEntrada.value);
+        }else{
+            alert("Simbolo não relacionado na binance");
         }
     });
 
 })
+
+function atualizarAlvos(valorDoAtivo){
+    let alvos = document.getElementsByClassName('alvo');
+    let lucro;
+    let lucroAlvo;
+    for(let i = 0; i < alvos.length; i++){
+        console.log("alvo" + i + ":"+ alvos[i].value);
+        lucro = 100 * ( Number(alvos[i].value) - Number(valorDoAtivo) ) / Number(valorDoAtivo);
+        lucroAlvo = alvos[i].nextElementSibling
+        lucroAlvo.innerText = lucro.toFixed(2) + "%";
+        atualizarCorAlvos(lucro,lucroAlvo)
+        console.log(lucro);
+    }
+}
+
+function  atualizarStop(valorDoAtivo){
+    let stopLoss = document.getElementsByClassName('stop-loss');
+    for (let i = 0; i < stopLoss.length; i++){
+        let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
+        let prejuizoStopLoss = stopLoss[i].nextElementSibling;
+        prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
+        atualizarCorStop(prejuizo, prejuizoStopLoss);
+    }
+}
+
+function atualizarCorAlvos(lucro, lucroAlvo){
+    if(lucro >= 0){
+        lucroAlvo.style.color = "green";
+    }else{
+        lucroAlvo.style.color = "red";
+    }
+}
+
+function atualizarCorStop(prejuizo, prejuizoStopLoss){
+    if(prejuizo >= 0){
+        prejuizoStopLoss.style.color = "red";
+    }else{
+        prejuizoStopLoss.style.color = "green";
+    }
+}
