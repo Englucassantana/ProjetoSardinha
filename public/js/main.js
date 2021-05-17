@@ -140,13 +140,15 @@ document.addEventListener("DOMContentLoaded",()=> {
         for (let i = 0; i < alvo.length; i++){
             let lucro = 100*(alvo[i].value - valorDoAtivo)/valorDoAtivo;
             let lucroAlvo = alvo[i].nextElementSibling;
-            lucroAlvo.innerText = lucro + "%";
+            lucroAlvo.innerText = lucro.toFixed(2) + "%";
+            atualizarCorAlvos(lucro, lucroAlvo)
         }
         let stopLoss = document.getElementsByClassName('stop-loss');
         for (let i = 0; i < stopLoss.length; i++){
             let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
             let prejuizoStopLoss = stopLoss[i].nextElementSibling;
-            prejuizoStopLoss.innerText = prejuizo + "%";
+            prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
+            atualizarCorStop(prejuizo,prejuizoStopLoss)
         }
     })
     //CALCULAR ALVO
@@ -166,6 +168,7 @@ document.addEventListener("DOMContentLoaded",()=> {
             let lucroAlvo = alvo.nextElementSibling;
             lucroAlvo.innerText = lucro.toFixed(2) + "%";
             atualizarCorAlvos(lucro,lucroAlvo);
+            avisoAlvos(lucro,lucroAlvo);
         }
     });
 
@@ -221,6 +224,7 @@ function atualizarAlvos(valorDoAtivo){
         lucroAlvo = alvos[i].nextElementSibling
         lucroAlvo.innerText = lucro.toFixed(2) + "%";
         atualizarCorAlvos(lucro,lucroAlvo)
+        avisoAlvos(lucro,lucroAlvo);
         console.log(lucro);
     }
 }
@@ -248,5 +252,17 @@ function atualizarCorStop(prejuizo, prejuizoStopLoss){
         prejuizoStopLoss.style.color = "red";
     }else{
         prejuizoStopLoss.style.color = "green";
+    }
+}
+
+function avisoAlvos(lucro, lucroAlvo){
+    if(lucro >= 0){
+        lucroAlvo =lucroAlvo.parentNode;
+        let aviso = lucroAlvo.getElementsByClassName("aviso")[0];
+        aviso.textContent = "";
+    }else{
+        lucroAlvo =lucroAlvo.parentNode;
+        let aviso = lucroAlvo.getElementsByClassName("aviso")[0];
+        aviso.textContent = "AVISO! Valor do alvo abaixo do valor de entrada.";
     }
 }
