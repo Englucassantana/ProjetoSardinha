@@ -130,26 +130,28 @@ document.addEventListener("DOMContentLoaded",()=> {
 
     //Valor Maximo de Entrada
     let valorDoAtivo = 0;
-    console.log(valorDoAtivo);
     let intervaloDeEntrada = document.getElementById('intervalo-de-entrada');
     intervaloDeEntrada.addEventListener('input', ()=>{
         valorDoAtivo = document.getElementsByClassName("valor-maximo-entrada")[0].value;
         valorDoAtivo = Number(valorDoAtivo);
         console.log("valor Máximo de Entrada:" + valorDoAtivo);
-        let alvo = document.getElementsByClassName('alvo');
-        for (let i = 0; i < alvo.length; i++){
-            let lucro = 100*(alvo[i].value - valorDoAtivo)/valorDoAtivo;
-            let lucroAlvo = alvo[i].nextElementSibling;
-            lucroAlvo.innerText = lucro.toFixed(2) + "%";
-            atualizarCorAlvos(lucro, lucroAlvo)
-        }
-        let stopLoss = document.getElementsByClassName('stop-loss');
-        for (let i = 0; i < stopLoss.length; i++){
-            let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
-            let prejuizoStopLoss = stopLoss[i].nextElementSibling;
-            prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
-            atualizarCorStop(prejuizo,prejuizoStopLoss)
-        }
+        atualizarAlvos(valorDoAtivo);
+        // let alvo = document.getElementsByClassName('alvo');
+        // for (let i = 0; i < alvo.length; i++){
+        //     let lucro = 100*(alvo[i].value - valorDoAtivo)/valorDoAtivo;
+        //     let lucroAlvo = alvo[i].nextElementSibling;
+        //     lucroAlvo.innerText = lucro.toFixed(2) + "%";
+        //     // atualizarCorAlvos(lucro, lucroAlvo)
+        //
+        // }
+        atualizarStop(valorDoAtivo);
+        // let stopLoss = document.getElementsByClassName('stop-loss');
+        // for (let i = 0; i < stopLoss.length; i++){
+        //     let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
+        //     let prejuizoStopLoss = stopLoss[i].nextElementSibling;
+        //     prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
+        //     // atualizarCorStop(prejuizo,prejuizoStopLoss)
+        // }
     })
     //CALCULAR ALVO
 
@@ -161,15 +163,16 @@ document.addEventListener("DOMContentLoaded",()=> {
         console.log(valorDoAtivo);
         let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
         valorDoAtivo = valorMaximoDeEntrada.value
-        let alvo = event.target||event.srcElement;
-        console.log(alvo);
-        if(alvo.tagName == "INPUT"){
-            let lucro = 100*(Number(alvo.value) - Number(valorDoAtivo))/Number(valorDoAtivo);
-            let lucroAlvo = alvo.nextElementSibling;
-            lucroAlvo.innerText = lucro.toFixed(2) + "%";
-            atualizarCorAlvos(lucro,lucroAlvo);
-            avisoAlvos(lucro,lucroAlvo);
-        }
+        atualizarAlvos(valorDoAtivo);
+        // let alvo = event.target||event.srcElement;
+        // console.log(alvo);
+        // if(alvo.tagName == "INPUT"){
+        //     let lucro = 100*(Number(alvo.value) - Number(valorDoAtivo))/Number(valorDoAtivo);
+        //     let lucroAlvo = alvo.nextElementSibling;
+        //     lucroAlvo.innerText = lucro.toFixed(2) + "%";
+        //     atualizarCorAlvos(lucro,lucroAlvo);
+        //     avisoAlvos(lucro,lucroAlvo);
+        // }
     });
 
     //CALCULO DO STOP
@@ -178,14 +181,15 @@ document.addEventListener("DOMContentLoaded",()=> {
         console.log(stop);
         let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
         valorDoAtivo = valorMaximoDeEntrada.value
-        let stopLoss = event.target||event.srcElement;
-        console.log(stopLoss);
-        if(stopLoss.tagName == "INPUT"){
-            let prejuizo = 100*(stopLoss.value - valorDoAtivo)/valorDoAtivo;
-            let prejuizoStopLoss = stopLoss.nextElementSibling;
-            prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
-            atualizarCorStop(prejuizo, prejuizoStopLoss);
-        }
+        atualizarStop(valorDoAtivo);
+        // let stopLoss = event.target||event.srcElement;
+        // console.log(stopLoss);
+        // if(stopLoss.tagName == "INPUT"){
+        //     let prejuizo = 100*(stopLoss.value - valorDoAtivo)/valorDoAtivo;
+        //     let prejuizoStopLoss = stopLoss.nextElementSibling;
+        //     prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
+        //     atualizarCorStop(prejuizo, prejuizoStopLoss);
+        // }
     });
 
     //Carregar entrada
@@ -223,7 +227,7 @@ function atualizarAlvos(valorDoAtivo){
         lucro = 100 * ( Number(alvos[i].value) - Number(valorDoAtivo) ) / Number(valorDoAtivo);
         lucroAlvo = alvos[i].nextElementSibling
         lucroAlvo.innerText = lucro.toFixed(2) + "%";
-        atualizarCorAlvos(lucro,lucroAlvo)
+        //atualizarCorAlvos(lucro,lucroAlvo);
         avisoAlvos(lucro,lucroAlvo);
         console.log(lucro);
     }
@@ -235,7 +239,9 @@ function  atualizarStop(valorDoAtivo){
         let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
         let prejuizoStopLoss = stopLoss[i].nextElementSibling;
         prejuizoStopLoss.innerText = prejuizo.toFixed(2) + "%";
-        atualizarCorStop(prejuizo, prejuizoStopLoss);
+        avisoStop(prejuizo,prejuizoStopLoss);
+        //atualizarCorStop(prejuizo, prejuizoStopLoss);
+
     }
 }
 
@@ -264,5 +270,17 @@ function avisoAlvos(lucro, lucroAlvo){
         lucroAlvo =lucroAlvo.parentNode;
         let aviso = lucroAlvo.getElementsByClassName("aviso")[0];
         aviso.textContent = "AVISO! Valor do alvo abaixo do valor de entrada.";
+    }
+}
+function avisoStop(prejuizo, prejuizoStopLoss){
+    if(prejuizo >= 0){
+        prejuizoStopLoss =prejuizoStopLoss.parentNode;
+        let aviso = prejuizoStopLoss.getElementsByClassName("aviso")[0];
+        aviso.textContent = "AVISO! Valor do stop acima do valor de entrada.";
+
+    }else{
+        prejuizoStopLoss =prejuizoStopLoss.parentNode;
+        let aviso = prejuizoStopLoss.getElementsByClassName("aviso")[0];
+        aviso.textContent = "";
     }
 }

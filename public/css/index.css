@@ -14,7 +14,7 @@ body{
 }
 
 #page{
-    max-width: 740px;
+    width: 740px;
 }
 
 .simbolo-do-ativo{
@@ -96,4 +96,13 @@ body{
 }
 #gerar-comando:focus{
     outline: none;
+}
+.linha-alvo{
+    padding-bottom: 5px;
+}
+
+#comando{
+    display: block;
+    text-align: center;
+    padding-top: 10px;
 }
