@@ -216,6 +216,34 @@ document.addEventListener("DOMContentLoaded",()=> {
         }
     });
 
+    //Adicionar novo alvo
+    let adicionarNovoAlvo = document.getElementById("adicionar-novo-alvo");
+    adicionarNovoAlvo.addEventListener("click", ()=>{
+        event.preventDefault();
+        let tabelaAlvo = document.getElementsByClassName("tabela-alvo");
+        let novoLinhaAlvo = document.createElement('div');
+        novoLinhaAlvo.setAttribute('class','linha-alvo');
+        let novoLabel = document.createElement('label')
+        let numeroDoNovoAlvo = document.getElementsByClassName("linha-alvo").length + 1;
+        novoLabel.innerText = `Alvo ${numeroDoNovoAlvo} `;
+        novoLinhaAlvo.appendChild(novoLabel);
+        let novoInput = document.createElement('input');
+        novoInput.setAttribute('class','alvo input-text');
+        novoInput.setAttribute('type','number');
+        novoInput.setAttribute('inputmode', 'decimal');
+        novoLinhaAlvo.appendChild(novoInput);
+        let novoSpanLucro = document.createElement('span');
+        novoSpanLucro.setAttribute('class', 'lucro-alvo');
+        novoSpanLucro.innerText = ' %';
+        novoLinhaAlvo.appendChild(novoSpanLucro);
+        let novoSpanAviso = document.createElement('span');
+        novoSpanAviso.setAttribute('class','aviso');
+        novoLinhaAlvo.appendChild(novoSpanAviso);
+        tabelaAlvo[0].appendChild(novoLinhaAlvo);
+             
+    });
+
+
 })
 
 function atualizarAlvos(valorDoAtivo){
