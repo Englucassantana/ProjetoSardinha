@@ -1,3 +1,14 @@
+let jsonComando = {
+    "pair" : "",
+    "entruMax" : 0,
+    "entryMin" : 0,
+    "target1" : 0,
+    "target2" : 0,
+    "target3" : 0,
+    "target4" : 0,
+    "stoploss" : 0
+}
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -126,6 +137,12 @@ document.addEventListener("DOMContentLoaded",()=> {
         }
         let comando = document.getElementById('comando');
         comando.innerText = novoComando
+        let i = 0;
+        for(let j in jsonComando){
+            jsonComando[j] = inputText[i].value;
+            i++;
+        }
+        console.log(JSON.stringify(jsonComando));
     });
 
     //Valor Maximo de Entrada
@@ -300,6 +317,7 @@ function avisoAlvos(lucro, lucroAlvo){
         aviso.textContent = "AVISO! Valor do alvo abaixo do valor de entrada.";
     }
 }
+
 function avisoStop(prejuizo, prejuizoStopLoss){
     if(prejuizo >= 0){
         prejuizoStopLoss =prejuizoStopLoss.parentNode;
@@ -312,3 +330,8 @@ function avisoStop(prejuizo, prejuizoStopLoss){
         aviso.textContent = "";
     }
 }
+
+function comandoParaJson(novoComando){
+
+}
+
