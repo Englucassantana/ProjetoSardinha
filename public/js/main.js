@@ -1,6 +1,6 @@
 let jsonComando = {
     "pair" : "",
-    "entruMax" : 0,
+    "entryMax" : 0,
     "entryMin" : 0,
     "target1" : 0,
     "target2" : 0,
@@ -136,13 +136,15 @@ document.addEventListener("DOMContentLoaded",()=> {
             else novoComando = novoComando + ";" +  + inputText[i].value;
         }
         let comando = document.getElementById('comando');
-        comando.innerText = novoComando
+        //comando.innerText = novoComando
         let i = 0;
         for(let j in jsonComando){
             jsonComando[j] = inputText[i].value;
             i++;
         }
         console.log(JSON.stringify(jsonComando));
+        comando.innerText = JSON.stringify(jsonComando);
+        navigator.clipboard.writeText(JSON.stringify(jsonComando));
     });
 
     //Valor Maximo de Entrada
@@ -260,7 +262,6 @@ document.addEventListener("DOMContentLoaded",()=> {
              
     });
 
-
 })
 
 function atualizarAlvos(valorDoAtivo){
@@ -278,7 +279,7 @@ function atualizarAlvos(valorDoAtivo){
     }
 }
 
-function  atualizarStop(valorDoAtivo){
+function atualizarStop(valorDoAtivo){
     let stopLoss = document.getElementsByClassName('stop-loss');
     for (let i = 0; i < stopLoss.length; i++){
         let prejuizo = 100*(stopLoss[i].value - valorDoAtivo)/valorDoAtivo;
@@ -330,8 +331,3 @@ function avisoStop(prejuizo, prejuizoStopLoss){
         aviso.textContent = "";
     }
 }
-
-function comandoParaJson(novoComando){
-
-}
-
