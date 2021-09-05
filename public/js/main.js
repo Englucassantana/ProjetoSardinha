@@ -1,7 +1,7 @@
 let jsonComando = {
     "pair" : "",
-    "entryMax" : 0,
     "entryMin" : 0,
+    "entryMax" : 0,
     "target1" : 0,
     "target2" : 0,
     "target3" : 0,
@@ -41,9 +41,11 @@ function autocomplete(inp, arr) {
                 b.addEventListener("click", function(e) {
                     /*insert the value for the autocomplete text field:*/
                     inp.value = this.getElementsByTagName("input")[0].value;
+                    carregarValoresMaximoEMinimo();
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
                     closeAllLists();
+                    resetarCampos();
                 });
                 a.appendChild(b);
             }
@@ -329,5 +331,34 @@ function avisoStop(prejuizo, prejuizoStopLoss){
         prejuizoStopLoss =prejuizoStopLoss.parentNode;
         let aviso = prejuizoStopLoss.getElementsByClassName("aviso")[0];
         aviso.textContent = "";
+    }
+}
+
+function carregarValoresMaximoEMinimo(){
+    let myInput = document.getElementById("myInput");
+        let precoAtualDoAtivo = 0;
+        for (let i = 0; i < responseObject.length; i++) {
+            if(responseObject[i].symbol == myInput.value){
+                precoAtualDoAtivo = responseObject[i].price;
+                break;
+            }
+        }
+        if(precoAtualDoAtivo > 0){
+            let valorMinimoDeEntrada = document.getElementsByClassName("valor-minimo-entrada")[0];
+            valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
+            let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
+            valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
+            console.log(valorMaximoDeEntrada.value);
+            atualizarAlvos(valorMaximoDeEntrada.value);
+            atualizarStop(valorMaximoDeEntrada.value);
+        }else{
+            alert("Simbolo não relacionado na binance");
+        }
+}
+
+function resetarCampos(){
+    let campo = document.getElementsByClassName("campo");
+    for (let i= 0; i < campo.length; i++){
+        campo[i].value = "";
     }
 }
