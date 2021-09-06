@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded",()=> {
         console.log(JSON.stringify(jsonComando));
         comando.innerText = JSON.stringify(jsonComando);
         navigator.clipboard.writeText(JSON.stringify(jsonComando));
+        alert("Comando copiado para a área de transferência");
     });
 
     //Valor Maximo de Entrada
@@ -361,4 +362,6 @@ function resetarCampos(){
     for (let i= 0; i < campo.length; i++){
         campo[i].value = "";
     }
+    atualizarAlvos("1");
+    atualizarStop("1");
 }
