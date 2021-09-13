@@ -7,8 +7,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site":"sardinhasinais2",
-    "public":"public",
+    "site": "sardinha-sinais-teste",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -16,4 +16,3 @@
     ]
   }
 }
-

@@ -6,7 +6,8 @@ let jsonComando = {
     "target2" : 0,
     "target3" : 0,
     "target4" : 0,
-    "stoploss" : 0
+    "stoploss" : 0,
+    "isHighRisk": ''
 }
 
 function autocomplete(inp, arr) {
@@ -141,7 +142,9 @@ document.addEventListener("DOMContentLoaded",()=> {
         //comando.innerText = novoComando
         let i = 0;
         for(let j in jsonComando){
-            jsonComando[j] = inputText[i].value;
+            if(inputText[i].type == "number")jsonComando[j] = inputText[i].valueAsNumber;
+            if(inputText[i].type == "text")jsonComando[j] = inputText[i].value;
+            if(inputText[i].type == "checkbox")jsonComando[j] = inputText[i].checked;
             i++;
         }
         console.log(JSON.stringify(jsonComando));
