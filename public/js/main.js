@@ -139,7 +139,9 @@ document.addEventListener("DOMContentLoaded",()=> {
             console.log(`key: ${key}`);
             const target = alvo[key];
             const numberKey = parseInt(key) + 1;
-            jsonComando[`target${numberKey}`] = target.valueAsNumber;            
+            if(target.valueAsNumber){
+              jsonComando[`target${numberKey}`] = target.valueAsNumber;
+            }                        
           }
         }
         jsonComando.stoploss = stoploss.valueAsNumber;
