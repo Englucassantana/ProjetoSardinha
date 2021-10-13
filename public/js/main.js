@@ -1,13 +1,5 @@
 let jsonComando = {
-    "pair" : "",
-    "entryMin" : 0,
-    "entryMax" : 0,
-    "target1" : 0,
-    "target2" : 0,
-    "target3" : 0,
-    "target4" : 0,
-    "stoploss" : 0,
-    "isHighRisk": ''
+    
 }
 
 function autocomplete(inp, arr) {
@@ -110,14 +102,14 @@ function autocomplete(inp, arr) {
 }
 
 let xhr = new XMLHttpRequest();
-let responseObject;
+let responsealvo;
 let listaDeSimbolos = [];
 
 xhr.onload = function () {
     if (xhr.status == 200) {
-        responseObject = JSON.parse(xhr.responseText);
-        for (let i = 0; i < responseObject.length; i++) {
-            listaDeSimbolos.push(responseObject[i].symbol);
+        responsealvo = JSON.parse(xhr.responseText);
+        for (let i = 0; i < responsealvo.length; i++) {
+            listaDeSimbolos.push(responsealvo[i].symbol);
         }
         console.log(listaDeSimbolos);
         autocomplete(document.getElementById("myInput"), listaDeSimbolos);
@@ -132,21 +124,41 @@ document.addEventListener("DOMContentLoaded",()=> {
     let gerarComando = document.getElementById("gerar-comando");
     gerarComando.addEventListener("click", (event) => {
         event.preventDefault();
-        let novoComando = ""
-        let inputText = document.getElementsByClassName("input-text");
-        for (let i = 0; i < inputText.length; i++) {
-            if(i==0) novoComando = novoComando + inputText[i].value
-            else novoComando = novoComando + ";" +  + inputText[i].value;
+        jsonComando = {};
+        const pair = document.getElementById('myInput');
+        const entryMin = document.getElementsByClassName('valor-minimo-entrada')[0];
+        const entryMax = document.getElementsByClassName('valor-maximo-entrada')[0];
+        const alvo = document.getElementsByClassName('alvo');
+        const stoploss = document.getElementsByClassName('stop-loss')[0];
+        const isHighRisk = document.getElementById('isHighRisk');
+        jsonComando.pair = pair.value;
+        jsonComando.entryMin = entryMin.valueAsNumber;
+        jsonComando.entryMax = entryMax.valueAsNumber;
+        for (const key in alvo) {
+          if (alvo.hasOwnProperty.call(alvo, key)) {
+            console.log(`key: ${key}`);
+            const target = alvo[key];
+            const numberKey = parseInt(key) + 1;
+            jsonComando[`target${numberKey}`] = target.valueAsNumber;            
+          }
         }
-        let comando = document.getElementById('comando');
-        //comando.innerText = novoComando
-        let i = 0;
-        for(let j in jsonComando){
-            if(inputText[i].type == "number")jsonComando[j] = inputText[i].valueAsNumber;
-            if(inputText[i].type == "text")jsonComando[j] = inputText[i].value;
-            if(inputText[i].type == "checkbox")jsonComando[j] = inputText[i].checked;
-            i++;
-        }
+        jsonComando.stoploss = stoploss.valueAsNumber;
+        jsonComando.isHighRisk = isHighRisk.checked;
+        // let novoComando = ""
+        // let inputText = document.getElementsByClassName("input-text");
+        // for (let i = 0; i < inputText.length; i++) {
+        //     if(i==0) novoComando = novoComando + inputText[i].value
+        //     else novoComando = novoComando + ";" +  + inputText[i].value;
+        // }
+        // let comando = document.getElementById('comando');
+        // //comando.innerText = novoComando
+        // let i = 0;
+        // for(let j in jsonComando){
+        //     if(inputText[i].type == "number")jsonComando[j] = inputText[i].valueAsNumber;
+        //     if(inputText[i].type == "text")jsonComando[j] = inputText[i].value;
+        //     if(inputText[i].type == "checkbox")jsonComando[j] = inputText[i].checked;
+        //     i++;
+        // }
         console.log(JSON.stringify(jsonComando));
         comando.innerText = JSON.stringify(jsonComando);
         navigator.clipboard.writeText(JSON.stringify(jsonComando));
@@ -222,9 +234,9 @@ document.addEventListener("DOMContentLoaded",()=> {
     loadButton.addEventListener("click",()=>{
         let myInput = document.getElementById("myInput");
         let precoAtualDoAtivo = 0;
-        for (let i = 0; i < responseObject.length; i++) {
-            if(responseObject[i].symbol == myInput.value){
-                precoAtualDoAtivo = responseObject[i].price;
+        for (let i = 0; i < responsealvo.length; i++) {
+            if(responsealvo[i].symbol == myInput.value){
+                precoAtualDoAtivo = responsealvo[i].price;
                 break;
             }
         }
@@ -341,9 +353,9 @@ function avisoStop(prejuizo, prejuizoStopLoss){
 function carregarValoresMaximoEMinimo(){
     let myInput = document.getElementById("myInput");
         let precoAtualDoAtivo = 0;
-        for (let i = 0; i < responseObject.length; i++) {
-            if(responseObject[i].symbol == myInput.value){
-                precoAtualDoAtivo = responseObject[i].price;
+        for (let i = 0; i < responsealvo.length; i++) {
+            if(responsealvo[i].symbol == myInput.value){
+                precoAtualDoAtivo = responsealvo[i].price;
                 break;
             }
         }
