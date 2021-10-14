@@ -1,4 +1,4 @@
-let jsonComando = {
+let dictComando = {
     
 }
 
@@ -124,46 +124,32 @@ document.addEventListener("DOMContentLoaded",()=> {
     let gerarComando = document.getElementById("gerar-comando");
     gerarComando.addEventListener("click", (event) => {
         event.preventDefault();
-        jsonComando = {};
+        dictComando = {};
         const pair = document.getElementById('myInput');
         const entryMin = document.getElementsByClassName('valor-minimo-entrada')[0];
         const entryMax = document.getElementsByClassName('valor-maximo-entrada')[0];
         const alvo = document.getElementsByClassName('alvo');
         const stoploss = document.getElementsByClassName('stop-loss')[0];
         const isHighRisk = document.getElementById('isHighRisk');
-        jsonComando.pair = pair.value;
-        jsonComando.entryMin = entryMin.valueAsNumber;
-        jsonComando.entryMax = entryMax.valueAsNumber;
+
+        dictComando.pair = pair.value;
+        dictComando.entryMin = entryMin.valueAsNumber;
+        dictComando.entryMax = entryMax.valueAsNumber;
         for (const key in alvo) {
-          if (alvo.hasOwnProperty.call(alvo, key)) {
-            console.log(`key: ${key}`);
+          if (Object.hasOwnProperty.call(alvo, key)) {
             const target = alvo[key];
             const numberKey = parseInt(key) + 1;
             if(target.valueAsNumber){
-              jsonComando[`target${numberKey}`] = target.valueAsNumber;
+              dictComando[`target${numberKey}`] = target.valueAsNumber;
             }                        
           }
         }
-        jsonComando.stoploss = stoploss.valueAsNumber;
-        jsonComando.isHighRisk = isHighRisk.checked;
-        // let novoComando = ""
-        // let inputText = document.getElementsByClassName("input-text");
-        // for (let i = 0; i < inputText.length; i++) {
-        //     if(i==0) novoComando = novoComando + inputText[i].value
-        //     else novoComando = novoComando + ";" +  + inputText[i].value;
-        // }
-        // let comando = document.getElementById('comando');
-        // //comando.innerText = novoComando
-        // let i = 0;
-        // for(let j in jsonComando){
-        //     if(inputText[i].type == "number")jsonComando[j] = inputText[i].valueAsNumber;
-        //     if(inputText[i].type == "text")jsonComando[j] = inputText[i].value;
-        //     if(inputText[i].type == "checkbox")jsonComando[j] = inputText[i].checked;
-        //     i++;
-        // }
-        console.log(JSON.stringify(jsonComando));
-        comando.innerText = JSON.stringify(jsonComando);
-        navigator.clipboard.writeText(JSON.stringify(jsonComando));
+        dictComando.stoploss = stoploss.valueAsNumber;
+        dictComando.isHighRisk = isHighRisk.checked;
+        let jsonComando = JSON.stringify(dictComando)
+        console.log(jsonComando);
+        comando.innerText = jsonComando;
+        navigator.clipboard.writeText(jsonComando);
         alert("Comando copiado para a área de transferência");
     });
 
@@ -203,15 +189,6 @@ document.addEventListener("DOMContentLoaded",()=> {
         let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
         valorDoAtivo = valorMaximoDeEntrada.value
         atualizarAlvos(valorDoAtivo);
-        // let alvo = event.target||event.srcElement;
-        // console.log(alvo);
-        // if(alvo.tagName == "INPUT"){
-        //     let lucro = 100*(Number(alvo.value) - Number(valorDoAtivo))/Number(valorDoAtivo);
-        //     let lucroAlvo = alvo.nextElementSibling;
-        //     lucroAlvo.innerText = lucro.toFixed(2) + "%";
-        //     atualizarCorAlvos(lucro,lucroAlvo);
-        //     avisoAlvos(lucro,lucroAlvo);
-        // }
     });
 
     //CALCULO DO STOP
