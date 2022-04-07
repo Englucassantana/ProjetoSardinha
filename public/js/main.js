@@ -98,6 +98,7 @@ function autocomplete(inp, arr) {
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
+        pairFeedback();
     });
 }
 
@@ -118,6 +119,20 @@ xhr.onload = function () {
 xhr.open('GET', "https://api.binance.com/api/v3/ticker/price", true);
 // xhr.open('GET',"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", true);
 xhr.send(null);
+
+
+let xhr2 = new XMLHttpRequest();
+let pairList = {};
+let method = 'GET'
+let url = 'https://ec2-18-191-20-190.us-east-2.compute.amazonaws.com:10313/stposition/signals';
+xhr2.onload = () =>{
+  if(xhr2.status == 200){
+    console.log(xhr2.responseText);
+    pairList = JSON.parse(xhr2.responseText);
+  }
+}
+xhr2.open(method, url);
+xhr2.send(null);
 
 document.addEventListener("DOMContentLoaded",()=> {
     //GERAR COMANDO
@@ -259,20 +274,39 @@ document.addEventListener("DOMContentLoaded",()=> {
              
     });
 
+    //Avisar sobrescrita de sinal
+    let myInput = document.getElementById("myInput");
+    myInput.addEventListener('input', pairFeedback,false);
+
 })
+
+function pairFeedback() {
+    let target = document.getElementById("myInput");
+    let sobrescrita = false;
+    const aviso = document.getElementById("inputAviso");
+    console.log(target.value);
+    pairList.data.forEach(pair => {
+        if (target.value == pair) {
+            sobrescrita = true;               
+        }
+    });
+
+    if (sobrescrita) {
+        aviso.textContent = "O sinal será sobrescrito.";
+    }else{
+        aviso.textContent = "";
+    }       
+} 
 
 function atualizarAlvos(valorDoAtivo){
     let alvos = document.getElementsByClassName('alvo');
     let lucro;
     let lucroAlvo;
     for(let i = 0; i < alvos.length; i++){
-        console.log("alvo" + i + ":"+ alvos[i].value);
         lucro = 100 * ( Number(alvos[i].value) - Number(valorDoAtivo) ) / Number(valorDoAtivo);
         lucroAlvo = alvos[i].nextElementSibling
         lucroAlvo.innerText = lucro.toFixed(2) + "%";
-        //atualizarCorAlvos(lucro,lucroAlvo);
         avisoAlvos(lucro,lucroAlvo);
-        console.log(lucro);
     }
 }
 
@@ -343,7 +377,6 @@ function carregarValoresMaximoEMinimo(){
             valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
             let valorMaximoDeEntrada = document.getElementsByClassName("valor-maximo-entrada")[0];
             valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
-            console.log(valorMaximoDeEntrada.value);
             atualizarAlvos(valorMaximoDeEntrada.value);
             atualizarStop(valorMaximoDeEntrada.value);
         }else{
